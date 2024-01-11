@@ -5,6 +5,7 @@
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "GroomComponent.h"
 
 #include "Components/InputComponent.h"
 #include "EnhancedInputComponent.h"
@@ -28,7 +29,14 @@ APlutoCharacter::APlutoCharacter()
 
 	ViewCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("ViewCamera"));
 	ViewCamera->SetupAttachment(CameraBoom);
-	
+
+	Hair = CreateDefaultSubobject<UGroomComponent>(TEXT("Hair"));
+	Hair->SetupAttachment(GetMesh());
+	Hair->AttachmentName = FString("Head");
+
+	Eyebrows = CreateDefaultSubobject<UGroomComponent>(TEXT("Eyebrows"));
+	Eyebrows->SetupAttachment(GetMesh());
+	Eyebrows->AttachmentName = FString("Head");
 	
 }
 
@@ -62,10 +70,7 @@ void APlutoCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &APlutoCharacter::Look);
 	}
 
-	//PlayerInputComponent->BindAxis(FName("MoveForward"), this, &APlutoCharacter::MoveForward);
-	//PlayerInputComponent->BindAxis(FName("MoveRight"), this,&APlutoCharacter::MoveRight);
-	//PlayerInputComponent->BindAxis(FName("Turn"), this, &APlutoCharacter::Turn);
-	//PlayerInputComponent->BindAxis(FName("LookUp"), this, &APlutoCharacter::LookUp);
+	PlayerInputComponent->BindAction(FName("Jump"), IE_Pressed, this, &ACharacter::Jump);
 	
 
 }
