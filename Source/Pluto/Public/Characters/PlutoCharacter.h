@@ -11,7 +11,6 @@ class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
-class UGroomComponent;
 
 UCLASS()
 class PLUTO_API APlutoCharacter : public ACharacter
@@ -51,10 +50,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	UCameraComponent* ViewCamera;
-	
-	UPROPERTY(EditAnywhere, Category = Hair)
-	UGroomComponent* Hair;
-
-	UPROPERTY(EditAnywhere, Category = Hair)
-	UGroomComponent* Eyebrows;
 };
